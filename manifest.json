@@ -1,11 +1,11 @@
 {	
-	"name": "AI Agent",
-	"short_name": "AI Agent",
+	"name": "AI Connector",
+	"short_name": "AI Connector",
 	"lang": "en-US",
 	"start_url": "/index.html",
 	"theme_color": "#209CEE",
 	"background_color": "#209CEE",
-	"description": "AI Agen",
+	"description": "AI Connector",
 	"display": "standalone",
 	"icons": [
 		{

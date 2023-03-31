@@ -1,4 +1,4 @@
-import { API_PROVIDER, API_MODAL, ApiAgentFactory } from '../lib/aiAgent.js';
+import { API_PROVIDER, API_MODAL, ApiConnectorFactory } from '../lib/aiConnector.js';
 //import Dexie from 'dexie';
 import Dexie from  '../vender/dexie-3.2.3/dexie.min.mjs';
 //import {myUtil} from '../lib/testModule.js';
@@ -7,7 +7,7 @@ import Dexie from  '../vender/dexie-3.2.3/dexie.min.mjs';
 //console.log(myUtil());
 
 (async function() {
-	const db = new Dexie('AiAgent');
+	const db = new Dexie('AiConnector');
 
 	db.version(1).stores({
 	  topicThread: '++id, apiProvider, apiModal, topic, question, answer, askTime'
@@ -123,12 +123,12 @@ import Dexie from  '../vender/dexie-3.2.3/dexie.min.mjs';
             apiModel: document.getElementById('selectAiModal').value,
             apiKey:localStorage.getItem('ApiKeyOpenAI')};
 
-            var aiAgent = ApiAgentFactory.createApiAgent(optionObj);
+            var aiConnector = ApiConnectorFactory.createApiConnector(optionObj);
             var question = document.getElementById('inputMsg').value;
-            //console.log(aiAgent.callAPI('Hello world'))
+            //console.log(aiConnector.callAPI('Hello world'))
 
             document.getElementById('spinnerLoading').style.display = "";
-            var response = await aiAgent.callAPI(question);
+            var response = await aiConnector.callAPI(question);
             document.getElementById('spinnerLoading').style.display = "none";
 
             console.log(response);
@@ -147,7 +147,7 @@ import Dexie from  '../vender/dexie-3.2.3/dexie.min.mjs';
 	window.topicThreadDao = topicThreadDao;
 
     
-    
+    /*
     //取得Notification的權限
     if (Notification.permission === "granted") {
       
@@ -156,6 +156,7 @@ import Dexie from  '../vender/dexie-3.2.3/dexie.min.mjs';
             console.log(permission);
         });
     }
+    */
 
     window.commonUtil = {
         showInfo:function(content) {
