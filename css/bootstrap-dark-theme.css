@@ -1,0 +1,53 @@
+body {
+    color: #939393;
+    background-color: #232323;
+}
+
+.table {
+  color: #c0c0c1;
+  border-color: #555555
+}
+
+.table th {
+  background-color: #292a2d;
+}
+
+.table > tbody > td {
+  background-color: #242424;
+}
+
+.table-list > tbody > tr:nth-child(even) { background-color: #292929; }
+
+.table-hover tbody tr:hover {
+  color: #939393;
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.modal-content {
+  background-color: #232323;
+}
+
+.nav, .navbar {
+  background-color: #292a2d;  
+}
+
+.navbar .nav-link, .navbar-brand{
+  color: #a5a5a5;
+}
+
+.nav-pills .nav-link.active,.nav-pills .show>.nav-link{
+  color:#eaeaea;
+  background-color:#000000
+}
+
+.nav-pills .nav-link{
+  color:#a5a5a5;
+}
+
+.border, .border-top, .border-end, .border-start, .border-bottom {
+  border-color: #3d3d3d!important;
+}
+
+.btn-close {
+  color: #a5a5a5;
+}

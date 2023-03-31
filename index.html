@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/icon/favicon-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/icon/favicon-180x180.png" sizes="180x180">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json?">   
+    
+    <link rel="stylesheet" href="vender/bootstrap-5.3.0-alpha2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vender/highlight.js-11.7.0/default.min.css">
+    <link rel="stylesheet" href="vender/highlight.js-11.7.0/atom-one-dark.min.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="css/index.css">
+    
+    <script defer src="vender/jquery-3.6.4/jquery-3.6.4.slim.min.js"></script>
+    <script defer src="vender/bootstrap-5.3.0-alpha2/js/bootstrap.bundle.min.js"></script>
+    <script defer src="vender/handlebars-4.7.7/handlebars.min.js"></script>
+    <script defer src="vender/markdown-it-13.0.1/markdown-it.min.js"></script>
+    <script defer src="vender/highlight.js-11.7.0/highlight.min.js"></script>
+    
+    <script defer src="js/index.js" type="module"></script>
+    
+    <title>AI Agent</title>
+  </head>
+  
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#viewHome">AI Agent</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#viewHome">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Config
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#viewConfigApiKey">API Keys</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <!-- Main Content -->
+    <main class="container my-5">
+      <div id="viewHome">
+        <div id="divQuestionThread">
+
+        </div>
+        
+
+        <footer class="py-3 fixed-bottom">
+          <div class="container text-center">
+            <div class="mb-3 row">
+              <div class="col-sm-2">
+                <select class="form-select" id="selectAiProvicer">
+                  <option value="OPEN_AI" selected>OpenAI</option>
+                </select>
+              </div>
+              <div class="col-sm-2">
+                <select class="form-select" id="selectAiModal">
+                  <option value="gpt-3.5-turbo" selected>ChatGpt3</option>
+                  <option value="ChatGpt4">ChatGpt4</option>
+                </select>
+              </div>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="inputMsg" placeholder="Send a message...">
+              </div>
+              <div class="col-sm-1">
+                <div class="spinner-border" role="status" id="spinnerLoading" style="display:none">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <div id="viewConfigApiKey" style="display:none">
+        <h1>API Key</h1>
+        <div class="mb-3">
+          <label for="inputConfigApiKeyOpenAI" class="form-label">OpenAI</label>
+          <input type="password" class="form-control" id="inputConfigApiKeyOpenAI" placeholder="Please paste key">
+        </div>
+
+        <button type="button" class="btn btn-primary" id="btnSaveApiKey">Save</button>
+      </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-absolute p-3 top-0 end-0" id="toastPlacement" data-original-class="toast-container position-absolute p-3">
+
+    </div>
+
+	<script id='toastTemplate' type="text/x-handlebars-template">
+<div class="toast align-items-center text-white bg-secondary border-0 top-0 end-0" role="alert"  aria-live="polite" aria-atomic="true" data-bs-delay="5000">
+  <div class="d-flex">
+    <div class="toast-body">
+      {{msg}}
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+  </script>
+
+  <script id='answerTemplate' type="text/x-handlebars-template">
+    {{#each .}}
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">Question</div>
+        {{question}}
+      </div>
+      <div class="card-body">
+        <div class="card-title">Answer</div>
+        {{{answerHtml}}}
+      </div>
+    </div>
+    {{/each}}
+    </div>
+  </script>
+
+  </body>
+
+<script>
+// Check that service workers are registered
+//if ('serviceWorker' in navigator) {
+//  // Use the window load event to keep the page load performant
+//  window.addEventListener('load', () => {
+//    navigator.serviceWorker.register('/service-worker.js', {
+//        scope: '.'
+//    });
+//  });
+//}
+
+'use strict';
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js', {scope:'.'})
+    .then(function(reg){
+        if(reg.installing) {
+            console.log('Service worker installing');
+          } else if(reg.waiting) {
+            console.log('Service worker installed');
+          } else if(reg.active) {
+            console.log('Service worker active');
+          }        
+        
+            reg.onupdatefound=function() {
+                var b=reg.installing;
+                b.onstatechange=function(){
+                    switch(b.state){
+                        case'installed':
+                            navigator.serviceWorker.controller?
+                                    console.log('New or updated content is available.'):
+                                    console.log('Content is now available offline!');
+                            break;
+                        case'redundant':
+                            console.error('The installing service worker became redundant.');}}}})
+     .catch(function(a){console.error('Error during service worker registration:',a)});    
+}
+
+
+</script>  
+
+</html>

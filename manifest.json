@@ -1,0 +1,22 @@
+{	
+	"name": "AI Agent",
+	"short_name": "AI Agent",
+	"lang": "en-US",
+	"start_url": "/index.html",
+	"theme_color": "#209CEE",
+	"background_color": "#209CEE",
+	"description": "AI Agen",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "icon/favicon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "icon/favicon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}
